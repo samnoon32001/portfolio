@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import floatingShape1 from "@/assets/floating-shape-1.png";
 import floatingShape2 from "@/assets/floating-shape-2.png";
 import floatingShape3 from "@/assets/floating-shape-3.png";
 
 export function HeroSection() {
+  const { data: settings } = useSiteSettings();
+
   return (
     <section
       id="home"
@@ -49,9 +52,9 @@ export function HeroSection() {
 
           {/* Main headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6 animate-fade-in-up stagger-1">
-            Hi, I'm <span className="gradient-text">[Your Name]</span>
+            Hi, I'm <span className="gradient-text">{settings?.name || 'Your Name'}</span>
             <br />
-            Web Developer & Designer
+            {settings?.tagline || 'Web Developer & Designer'}
           </h1>
 
           {/* Subtitle */}
@@ -74,9 +77,9 @@ export function HeroSection() {
 
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up stagger-4">
-            <StatItem value="5+" label="Years Experience" />
-            <StatItem value="50+" label="Projects Completed" />
-            <StatItem value="30+" label="Happy Clients" />
+            <StatItem value={`${settings?.years_experience || 5}+`} label="Years Experience" />
+            <StatItem value={`${settings?.projects_completed || 50}+`} label="Projects Completed" />
+            <StatItem value={`${settings?.satisfied_clients || 30}+`} label="Happy Clients" />
             <StatItem value="99%" label="Client Satisfaction" />
           </div>
         </div>
