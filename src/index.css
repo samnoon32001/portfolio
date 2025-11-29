@@ -99,78 +99,135 @@
     animation-delay: 1s;
   }
 
-  /* 3D Cube Styles */
-.cube-3d {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotate-cube 20s infinite linear;
+  /* 3D Illusion Styles - Gradients and Shadows */
+
+/* Cube Gradients - Simulates 3D faces */
+.cube-gradient-primary {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary) / 0.6) 0%, 
+    hsl(var(--primary) / 0.4) 25%, 
+    hsl(var(--primary) / 0.3) 50%, 
+    hsl(var(--primary) / 0.5) 75%, 
+    hsl(var(--primary) / 0.7) 100%);
+  box-shadow: 
+    inset -5px -5px 15px rgba(0,0,0,0.2),
+    inset 5px 5px 15px rgba(255,255,255,0.1),
+    0 10px 30px hsl(var(--primary) / 0.3),
+    0 20px 60px hsl(var(--primary) / 0.2);
 }
 
-.cube-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
+.cube-gradient-blue {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.6) 0%, 
+    rgba(59, 130, 246, 0.4) 25%, 
+    rgba(59, 130, 246, 0.3) 50%, 
+    rgba(59, 130, 246, 0.5) 75%, 
+    rgba(59, 130, 246, 0.7) 100%);
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.2),
+    inset 3px 3px 10px rgba(255,255,255,0.1),
+    0 8px 25px rgba(59, 130, 246, 0.3),
+    0 15px 40px rgba(59, 130, 246, 0.2);
 }
 
-.cube-front { transform: translateZ(50%); }
-.cube-back { transform: rotateY(180deg) translateZ(50%); }
-.cube-right { transform: rotateY(90deg) translateZ(50%); }
-.cube-left { transform: rotateY(-90deg) translateZ(50%); }
-.cube-top { transform: rotateX(90deg) translateZ(50%); }
-.cube-bottom { transform: rotateX(-90deg) translateZ(50%); }
-
-/* Responsive cube sizes */
-@media (max-width: 768px) {
-  .cube-front { transform: translateZ(40%); }
-  .cube-back { transform: rotateY(180deg) translateZ(40%); }
-  .cube-right { transform: rotateY(90deg) translateZ(40%); }
-  .cube-left { transform: rotateY(-90deg) translateZ(40%); }
-  .cube-top { transform: rotateX(90deg) translateZ(40%); }
-  .cube-bottom { transform: rotateX(-90deg) translateZ(40%); }
+.cube-gradient-orange {
+  background: linear-gradient(135deg, 
+    rgba(249, 115, 22, 0.6) 0%, 
+    rgba(249, 115, 22, 0.4) 25%, 
+    rgba(249, 115, 22, 0.3) 50%, 
+    rgba(249, 115, 22, 0.5) 75%, 
+    rgba(249, 115, 22, 0.7) 100%);
+  box-shadow: 
+    inset -4px -4px 12px rgba(0,0,0,0.2),
+    inset 4px 4px 12px rgba(255,255,255,0.1),
+    0 10px 30px rgba(249, 115, 22, 0.3),
+    0 20px 50px rgba(249, 115, 22, 0.2);
 }
 
-/* 3D Sphere Styles */
-.sphere-3d {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotate-sphere 15s infinite linear;
+.cube-gradient-green {
+  background: linear-gradient(135deg, 
+    rgba(34, 197, 94, 0.6) 0%, 
+    rgba(34, 197, 94, 0.4) 25%, 
+    rgba(34, 197, 94, 0.3) 50%, 
+    rgba(34, 197, 94, 0.5) 75%, 
+    rgba(34, 197, 94, 0.7) 100%);
+  box-shadow: 
+    inset -2px -2px 8px rgba(0,0,0,0.2),
+    inset 2px 2px 8px rgba(255,255,255,0.1),
+    0 6px 20px rgba(34, 197, 94, 0.3),
+    0 12px 30px rgba(34, 197, 94, 0.2);
 }
 
-.sphere-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  backdrop-filter: blur(8px);
+/* Sphere Gradients - Simulates 3D sphere */
+.sphere-gradient-purple {
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(168, 85, 247, 0.8) 0%, 
+    rgba(168, 85, 247, 0.6) 20%, 
+    rgba(168, 85, 247, 0.4) 40%, 
+    rgba(168, 85, 247, 0.3) 60%, 
+    rgba(168, 85, 247, 0.2) 80%, 
+    rgba(168, 85, 247, 0.1) 100%);
+  box-shadow: 
+    inset -5px -5px 15px rgba(0,0,0,0.3),
+    inset 5px 5px 15px rgba(255,255,255,0.2),
+    0 10px 30px rgba(168, 85, 247, 0.4),
+    0 20px 60px rgba(168, 85, 247, 0.3);
 }
 
-.sphere-front { transform: translateZ(50%); }
-.sphere-back { transform: rotateY(180deg) translateZ(50%); }
-.sphere-right { transform: rotateY(90deg) translateZ(50%); }
-.sphere-left { transform: rotateY(-90deg) translateZ(50%); }
-
-/* Responsive sphere sizes */
-@media (max-width: 768px) {
-  .sphere-front { transform: translateZ(40%); }
-  .sphere-back { transform: rotateY(180deg) translateZ(40%); }
-  .sphere-right { transform: rotateY(90deg) translateZ(40%); }
-  .sphere-left { transform: rotateY(-90deg) translateZ(40%); }
+.sphere-gradient-cyan {
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(6, 182, 212, 0.8) 0%, 
+    rgba(6, 182, 212, 0.6) 20%, 
+    rgba(6, 182, 212, 0.4) 40%, 
+    rgba(6, 182, 212, 0.3) 60%, 
+    rgba(6, 182, 212, 0.2) 80%, 
+    rgba(6, 182, 212, 0.1) 100%);
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.3),
+    inset 3px 3px 10px rgba(255,255,255,0.2),
+    0 8px 25px rgba(6, 182, 212, 0.4),
+    0 15px 40px rgba(6, 182, 212, 0.3);
 }
 
-/* 3D Rotation Animations */
-@keyframes rotate-cube {
-  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+/* Enhanced shadow utilities */
+.shadow-cube-3d {
+  box-shadow: 
+    inset -5px -5px 15px rgba(0,0,0,0.2),
+    inset 5px 5px 15px rgba(255,255,255,0.1),
+    0 10px 30px hsl(var(--primary) / 0.3),
+    0 20px 60px hsl(var(--primary) / 0.2) !important;
 }
 
-@keyframes rotate-sphere {
-  0% { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg); }
+.shadow-cube-3d-sm {
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.2),
+    inset 3px 3px 10px rgba(255,255,255,0.1),
+    0 8px 25px rgba(59, 130, 246, 0.3),
+    0 15px 40px rgba(59, 130, 246, 0.2) !important;
+}
+
+.shadow-cube-3d-xs {
+  box-shadow: 
+    inset -2px -2px 8px rgba(0,0,0,0.2),
+    inset 2px 2px 8px rgba(255,255,255,0.1),
+    0 6px 20px rgba(34, 197, 94, 0.3),
+    0 12px 30px rgba(34, 197, 94, 0.2) !important;
+}
+
+.shadow-sphere-3d {
+  box-shadow: 
+    inset -5px -5px 15px rgba(0,0,0,0.3),
+    inset 5px 5px 15px rgba(255,255,255,0.2),
+    0 10px 30px rgba(168, 85, 247, 0.4),
+    0 20px 60px rgba(168, 85, 247, 0.3) !important;
+}
+
+.shadow-sphere-3d-sm {
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.3),
+    inset 3px 3px 10px rgba(255,255,255,0.2),
+    0 8px 25px rgba(6, 182, 212, 0.4),
+    0 15px 40px rgba(6, 182, 212, 0.3) !important;
 }
 
 /* 3D Floating animations with enhanced transforms */
