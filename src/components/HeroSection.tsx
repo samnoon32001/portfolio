@@ -14,12 +14,12 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-hero-gradient" />
       
       {/* Floating decorative elements - NextMind inspired clean geometric shapes */}
-      <div className="absolute left-[8%] top-[25%] w-20 md:w-24 h-20 md:h-24 opacity-30 floating bg-gradient-to-br from-primary/40 to-transparent rounded-lg" />
-      <div className="absolute right-[12%] top-[20%] w-16 md:w-20 h-16 md:h-20 opacity-25 floating-delayed bg-gradient-to-tr from-purple-500/30 to-transparent rounded-full" />
-      <div className="absolute left-[15%] bottom-[30%] w-12 md:w-16 h-12 md:h-16 opacity-20 floating-slow bg-gradient-to-bl from-blue-500/25 to-transparent rounded-md" />
-      <div className="absolute right-[20%] bottom-[25%] w-14 md:w-18 h-14 md:h-18 opacity-25 floating-slow rotate-45 bg-gradient-to-tl from-orange-500/30 to-transparent rounded-lg" />
-      <div className="absolute left-[45%] top-[15%] w-8 md:w-10 h-8 md:h-10 opacity-15 floating bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full" />
-      <div className="absolute right-[35%] bottom-[20%] w-6 md:w-8 h-6 md:h-8 opacity-20 floating-delayed bg-gradient-to-b from-green-500/25 to-transparent rounded-md" />
+      <div className="absolute left-[8%] top-[25%] w-20 md:w-24 h-20 md:h-24 opacity-40 floating bg-primary/20 rounded-lg border border-primary/30" />
+      <div className="absolute right-[12%] top-[20%] w-16 md:w-20 h-16 md:h-20 opacity-35 floating-delayed bg-purple-500/20 rounded-full border border-purple-500/30" />
+      <div className="absolute left-[15%] bottom-[30%] w-12 md:w-16 h-12 md:h-16 opacity-30 floating-slow bg-blue-500/20 rounded-md border border-blue-500/30" />
+      <div className="absolute right-[20%] bottom-[25%] w-14 md:w-18 h-14 md:h-18 opacity-35 floating-slow rotate-45 bg-orange-500/20 rounded-lg border border-orange-500/30" />
+      <div className="absolute left-[45%] top-[15%] w-8 md:w-10 h-8 md:h-10 opacity-25 floating bg-cyan-500/20 rounded-full border border-cyan-500/30" />
+      <div className="absolute right-[35%] bottom-[20%] w-6 md:w-8 h-6 md:h-8 opacity-30 floating-delayed bg-green-500/20 rounded-md border border-green-500/30" />
 
       {/* Gradient orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" />
