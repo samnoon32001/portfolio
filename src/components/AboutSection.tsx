@@ -22,14 +22,14 @@ export function AboutSection() {
             </div>
             
             {/* Decorative card */}
-            <div className="absolute -bottom-6 -right-6 lg:right-auto lg:-left-6 glass-card rounded-xl p-4 animate-fade-in-delayed">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <GraduationCap className="text-primary" />
+            <div className="hidden sm:block absolute -bottom-4 right-4 lg:right-auto lg:-left-4 glass-card rounded-xl p-3 animate-fade-in-delayed z-10">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <GraduationCap className="text-primary" size={18} />
                 </div>
                 <div>
-                  <div className="font-semibold">Education</div>
-                  <div className="text-sm text-muted-foreground">CS Degree</div>
+                  <div className="font-semibold text-sm">Education</div>
+                  <div className="text-xs text-muted-foreground">CS Degree</div>
                 </div>
               </div>
             </div>
