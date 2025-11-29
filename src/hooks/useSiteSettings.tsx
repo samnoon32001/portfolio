@@ -37,15 +37,43 @@ export function useUpdateSiteSettings() {
   
   return useMutation({
     mutationFn: async (settings: Partial<SiteSettings>) => {
-      const { data, error } = await supabase
+      // First, try to get existing settings
+      const { data: existing, error: fetchError } = await supabase
         .from('site_settings')
-        .update(settings)
-        .eq('id', settings.id)
-        .select()
+        .select('id')
+        .limit(1)
         .single();
+
+      if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 is "no rows returned"
+        throw fetchError;
+      }
+
+      let result;
+      if (existing) {
+        // Update existing record
+        const { data, error } = await supabase
+          .from('site_settings')
+          .update(settings)
+          .eq('id', existing.id)
+          .select()
+          .single();
+        
+        if (error) throw error;
+        result = data;
+      } else {
+        // Insert new record (remove id from settings if present)
+        const { id, ...settingsToInsert } = settings;
+        const { data, error } = await supabase
+          .from('site_settings')
+          .insert(settingsToInsert)
+          .select()
+          .single();
+        
+        if (error) throw error;
+        result = data;
+      }
       
-      if (error) throw error;
-      return data;
+      return result;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['site-settings'] });
