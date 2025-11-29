@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
-import floatingShape1 from "@/assets/floating-shape-1.png";
-import floatingShape2 from "@/assets/floating-shape-2.png";
-import floatingShape3 from "@/assets/floating-shape-3.png";
 
 export function HeroSection() {
   const { data: settings } = useSiteSettings();
@@ -16,27 +13,11 @@ export function HeroSection() {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-hero-gradient" />
       
-      {/* Floating decorative elements */}
-      <img
-        src={floatingShape1}
-        alt=""
-        className="absolute left-[5%] top-[30%] w-32 md:w-48 opacity-70 floating mix-blend-lighten"
-      />
-      <img
-        src={floatingShape3}
-        alt=""
-        className="absolute right-[5%] top-[15%] w-32 md:w-44 opacity-60 floating-delayed mix-blend-lighten"
-      />
-      <img
-        src={floatingShape2}
-        alt=""
-        className="absolute left-[10%] bottom-[25%] w-24 md:w-32 opacity-50 floating-slow mix-blend-lighten"
-      />
-      <img
-        src={floatingShape1}
-        alt=""
-        className="absolute right-[15%] bottom-[20%] w-24 md:w-32 opacity-50 floating-slow rotate-45 mix-blend-lighten"
-      />
+      {/* Floating decorative elements - Dynamic CSS shapes */}
+      <div className="absolute left-[5%] top-[30%] w-32 md:w-48 h-32 md:h-48 opacity-70 floating bg-gradient-to-br from-primary/20 to-orange-600/20 rounded-full blur-sm hover:scale-110 transition-transform duration-1000" />
+      <div className="absolute right-[5%] top-[15%] w-32 md:w-44 h-32 md:h-44 opacity-60 floating-delayed bg-gradient-to-tr from-purple-500/20 to-pink-600/20 rounded-2xl blur-sm hover:rotate-12 transition-transform duration-700" />
+      <div className="absolute left-[10%] bottom-[25%] w-24 md:w-32 h-24 md:h-32 opacity-50 floating-slow bg-gradient-to-bl from-blue-500/20 to-cyan-600/20 rounded-lg blur-sm hover:scale-95 transition-transform duration-800" />
+      <div className="absolute right-[15%] bottom-[20%] w-24 md:w-32 h-24 md:h-32 opacity-50 floating-slow rotate-45 bg-gradient-to-tl from-green-500/20 to-emerald-600/20 rounded-3xl blur-sm hover:rotate-90 transition-transform duration-1000" />
 
       {/* Gradient orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" />
