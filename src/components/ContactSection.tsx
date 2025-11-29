@@ -4,42 +4,56 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-const contactInfo = [
-  {
-    icon: <Mail size={24} />,
-    label: "Email",
-    value: "your@email.com",
-    href: "mailto:your@email.com",
-  },
-  {
-    icon: <Phone size={24} />,
-    label: "Phone",
-    value: "+1 234 567 890",
-    href: "tel:+1234567890",
-  },
-  {
-    icon: <MapPin size={24} />,
-    label: "Location",
-    value: "Your City, Country",
-    href: "#",
-  },
-];
-
-const socialLinks = [
-  { icon: <Github size={20} />, href: "#", label: "GitHub" },
-  { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" },
-  { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
-];
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function ContactSection() {
   const { toast } = useToast();
+  const { data: settings } = useSiteSettings();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
+
+  const contactInfo = [
+    {
+      icon: <Mail size={24} />,
+      label: "Email",
+      value: settings?.email || "your@email.com",
+      href: `mailto:${settings?.email || "your@email.com"}`,
+    },
+    {
+      icon: <Phone size={24} />,
+      label: "Phone",
+      value: settings?.phone || "+1 234 567 890",
+      href: `tel:${settings?.phone || "+1234567890"}`,
+    },
+    {
+      icon: <MapPin size={24} />,
+      label: "Location",
+      value: settings?.location || "Your City, Country",
+      href: "#",
+    },
+  ];
+
+  const socialLinks = [
+    { 
+      icon: <Github size={20} />, 
+      href: settings?.github_url || "#", 
+      label: "GitHub" 
+    },
+    { 
+      icon: <Linkedin size={20} />, 
+      href: settings?.linkedin_url || "#", 
+      label: "LinkedIn" 
+    },
+    { 
+      icon: <Twitter size={20} />, 
+      href: settings?.twitter_url || "#", 
+      label: "Twitter" 
+    },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

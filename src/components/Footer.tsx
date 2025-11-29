@@ -1,21 +1,24 @@
 import { Github, Linkedin, Twitter, Heart } from "lucide-react";
-
-const footerLinks = {
-  navigation: [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ],
-  social: [
-    { icon: <Github size={18} />, href: "#", label: "GitHub" },
-    { icon: <Linkedin size={18} />, href: "#", label: "LinkedIn" },
-    { icon: <Twitter size={18} />, href: "#", label: "Twitter" },
-  ],
-};
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function Footer() {
+  const { data: settings } = useSiteSettings();
+  
+  const footerLinks = {
+    navigation: [
+      { name: "Home", href: "#home" },
+      { name: "About", href: "#about" },
+      { name: "Skills", href: "#skills" },
+      { name: "Projects", href: "#projects" },
+      { name: "Contact", href: "#contact" },
+    ],
+    social: [
+      { icon: <Github size={18} />, href: settings?.github_url || "#", label: "GitHub" },
+      { icon: <Linkedin size={18} />, href: settings?.linkedin_url || "#", label: "LinkedIn" },
+      { icon: <Twitter size={18} />, href: settings?.twitter_url || "#", label: "Twitter" },
+    ],
+  };
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-4 py-12">
@@ -29,7 +32,7 @@ export function Footer() {
               <span className="font-heading font-bold text-xl">Portfolio</span>
             </a>
             <p className="text-sm text-muted-foreground">
-              Building digital experiences that matter.
+              {settings?.footer_tagline || 'Building digital experiences that matter.'}
             </p>
           </div>
 
@@ -65,7 +68,7 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
             © {new Date().getFullYear()} Made with{" "}
-            <Heart size={14} className="text-primary fill-primary" /> by [Your Name]
+            <Heart size={14} className="text-primary fill-primary" /> by {settings?.copyright_name || settings?.name || 'Your Name'}
           </p>
         </div>
       </div>

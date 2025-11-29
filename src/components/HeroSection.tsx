@@ -59,19 +59,22 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in-up stagger-2">
-            I craft beautiful, responsive, and user-friendly web experiences
-            using modern technologies. Let's build something amazing together.
+            {settings?.hero_subtitle || 'I craft beautiful, responsive, and user-friendly web experiences using modern technologies. Let\'s build something amazing together.'}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-3">
-            <Button variant="hero" size="xl">
-              View My Work
-              <ArrowRight className="ml-2" />
+            <Button variant="hero" size="xl" asChild>
+              <a href={settings?.hero_cta_primary_url || '#projects'}>
+                {settings?.hero_cta_primary_text || 'View My Work'}
+                <ArrowRight className="ml-2" />
+              </a>
             </Button>
-            <Button variant="heroOutline" size="xl">
-              <Download className="mr-2" />
-              Download CV
+            <Button variant="heroOutline" size="xl" asChild>
+              <a href={settings?.hero_cta_secondary_url || '#'}>
+                <Download className="mr-2" />
+                {settings?.hero_cta_secondary_text || 'Download CV'}
+              </a>
             </Button>
           </div>
 
