@@ -1,73 +1,142 @@
-# Welcome to your Lovable project
+# Personal Portfolio Website
 
-## Project info
+A stunning, modern portfolio website inspired by the NextMind theme design. Built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/67651d2d-5277-4fcd-b6e5-ec80541ed235
+## ✨ Features
 
-## How can I edit this code?
+- **NextMind-Inspired Design**: Dark theme with orange/coral gradient accents
+- **Responsive Layout**: Works seamlessly on desktop, tablet, and mobile
+- **Smooth Animations**: Floating elements, fade-ins, and hover effects
+- **Sections Included**:
+  - Hero with stats counters
+  - About Me with contact info
+  - Skills & Services grid
+  - Projects gallery with filtering
+  - Contact form with social links
+  - Footer with navigation
 
-There are several ways of editing your application.
+## 🎨 Customization Guide
 
-**Use Lovable**
+### 1. Personal Information
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/67651d2d-5277-4fcd-b6e5-ec80541ed235) and start prompting.
+Update your name and details in these files:
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+**`src/components/HeroSection.tsx`**
+```tsx
+// Change [Your Name] to your actual name
+<h1>Hi, I'm <span className="gradient-text">[Your Name]</span></h1>
 ```
 
-**Edit a file directly in GitHub**
+**`src/components/AboutSection.tsx`**
+- Update bio text
+- Change location, email, languages
+- Replace "YN" initials with your own
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**`src/components/ContactSection.tsx`**
+- Update email, phone, location
+- Add your social media links
 
-**Use GitHub Codespaces**
+### 2. Projects
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Edit `src/components/ProjectsSection.tsx`:
+```tsx
+const projects = [
+  {
+    title: "Your Project Name",
+    description: "Project description...",
+    image: "your-image-url.jpg",
+    tags: ["React", "TypeScript"],
+    category: "Web App",
+    liveUrl: "https://...",
+    githubUrl: "https://...",
+  },
+  // Add more projects...
+];
+```
 
-## What technologies are used for this project?
+### 3. Skills & Services
 
-This project is built with:
+Edit `src/components/SkillsSection.tsx` to update:
+- Skills array with your expertise
+- Tech stack icons in the marquee
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 4. Profile Photo
 
-## How can I deploy this project?
+Replace the placeholder in `AboutSection.tsx` with your actual image:
+```tsx
+<img src={yourPhoto} alt="Your Name" className="..." />
+```
 
-Simply open [Lovable](https://lovable.dev/projects/67651d2d-5277-4fcd-b6e5-ec80541ed235) and click on Share -> Publish.
+### 5. Logo
 
-## Can I connect a custom domain to my Lovable project?
+Update the logo in `Navbar.tsx` and `Footer.tsx`:
+- Change the "P" initial
+- Or replace with your own logo image
 
-Yes, you can!
+### 6. Colors (Optional)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Modify `src/index.css` to change the color scheme:
+```css
+:root {
+  --primary: 24 95% 53%; /* Orange - change HSL values */
+  --background: 222 47% 5%; /* Dark navy */
+}
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### 7. SEO
+
+Update `index.html` with your actual:
+- Title
+- Meta description
+- Open Graph tags
+- Twitter card info
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── assets/          # Images & floating shapes
+├── components/
+│   ├── ui/          # Shadcn UI components
+│   ├── Navbar.tsx
+│   ├── HeroSection.tsx
+│   ├── AboutSection.tsx
+│   ├── SkillsSection.tsx
+│   ├── ProjectsSection.tsx
+│   ├── ContactSection.tsx
+│   └── Footer.tsx
+├── pages/
+│   └── Index.tsx    # Main page composition
+├── index.css        # Design system & animations
+└── App.tsx          # Router setup
+```
+
+## 🛠 Tech Stack
+
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first styling
+- **Shadcn UI** - Component library
+- **Lucide React** - Icon system
+- **Vite** - Build tool
+
+## 📄 License
+
+MIT License - Feel free to use for personal or commercial projects.
+
+---
+
+Made with ❤️ using [Lovable](https://lovable.dev)
