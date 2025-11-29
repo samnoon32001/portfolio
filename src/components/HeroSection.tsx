@@ -17,22 +17,22 @@ export function HeroSection() {
       <img
         src={floatingShape1}
         alt=""
-        className="absolute left-[5%] top-[30%] w-32 md:w-48 opacity-60 floating"
+        className="absolute left-[5%] top-[30%] w-32 md:w-48 opacity-70 floating mix-blend-lighten"
       />
       <img
         src={floatingShape3}
         alt=""
-        className="absolute right-[5%] top-[15%] w-32 md:w-44 opacity-50 floating-delayed"
+        className="absolute right-[5%] top-[15%] w-32 md:w-44 opacity-60 floating-delayed mix-blend-lighten"
       />
       <img
         src={floatingShape2}
         alt=""
-        className="absolute left-[10%] bottom-[25%] w-24 md:w-32 opacity-40 floating-slow"
+        className="absolute left-[10%] bottom-[25%] w-24 md:w-32 opacity-50 floating-slow mix-blend-lighten"
       />
       <img
         src={floatingShape1}
         alt=""
-        className="absolute right-[15%] bottom-[20%] w-24 md:w-32 opacity-40 floating-slow rotate-45"
+        className="absolute right-[15%] bottom-[20%] w-24 md:w-32 opacity-50 floating-slow rotate-45 mix-blend-lighten"
       />
 
       {/* Gradient orb */}
