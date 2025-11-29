@@ -14,6 +14,20 @@ export interface SiteSettings {
   years_experience: number | null;
   projects_completed: number | null;
   satisfied_clients: number | null;
+  // New contact and social fields
+  phone: string | null;
+  github_url: string | null;
+  linkedin_url: string | null;
+  twitter_url: string | null;
+  // Hero section customization
+  hero_subtitle: string | null;
+  hero_cta_primary_text: string | null;
+  hero_cta_primary_url: string | null;
+  hero_cta_secondary_text: string | null;
+  hero_cta_secondary_url: string | null;
+  // Footer customization
+  footer_tagline: string | null;
+  copyright_name: string | null;
 }
 
 export function useSiteSettings() {
@@ -42,7 +56,21 @@ export function useSiteSettings() {
           education: 'Education',
           years_experience: 5,
           projects_completed: 50,
-          satisfied_clients: 30
+          satisfied_clients: 30,
+          // New contact and social fields
+          phone: '+1 234 567 890',
+          github_url: '#',
+          linkedin_url: '#',
+          twitter_url: '#',
+          // Hero section customization
+          hero_subtitle: 'I craft beautiful, responsive, and user-friendly web experiences using modern technologies. Let\'s build something amazing together.',
+          hero_cta_primary_text: 'View My Work',
+          hero_cta_primary_url: '#projects',
+          hero_cta_secondary_text: 'Download CV',
+          hero_cta_secondary_url: '#',
+          // Footer customization
+          footer_tagline: 'Building digital experiences that matter.',
+          copyright_name: 'Your Name'
         } as SiteSettings;
       }
       

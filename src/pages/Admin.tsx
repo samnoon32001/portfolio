@@ -33,7 +33,21 @@ export default function Admin() {
     education: '',
     years_experience: 0,
     projects_completed: 0,
-    satisfied_clients: 0
+    satisfied_clients: 0,
+    // New contact and social fields
+    phone: '',
+    github_url: '',
+    linkedin_url: '',
+    twitter_url: '',
+    // Hero section customization
+    hero_subtitle: '',
+    hero_cta_primary_text: '',
+    hero_cta_primary_url: '',
+    hero_cta_secondary_text: '',
+    hero_cta_secondary_url: '',
+    // Footer customization
+    footer_tagline: '',
+    copyright_name: ''
   });
 
   const [newProject, setNewProject] = useState({
@@ -66,7 +80,21 @@ export default function Admin() {
         education: settings.education || '',
         years_experience: settings.years_experience || 0,
         projects_completed: settings.projects_completed || 0,
-        satisfied_clients: settings.satisfied_clients || 0
+        satisfied_clients: settings.satisfied_clients || 0,
+        // New contact and social fields
+        phone: settings.phone || '',
+        github_url: settings.github_url || '',
+        linkedin_url: settings.linkedin_url || '',
+        twitter_url: settings.twitter_url || '',
+        // Hero section customization
+        hero_subtitle: settings.hero_subtitle || '',
+        hero_cta_primary_text: settings.hero_cta_primary_text || '',
+        hero_cta_primary_url: settings.hero_cta_primary_url || '',
+        hero_cta_secondary_text: settings.hero_cta_secondary_text || '',
+        hero_cta_secondary_url: settings.hero_cta_secondary_url || '',
+        // Footer customization
+        footer_tagline: settings.footer_tagline || '',
+        copyright_name: settings.copyright_name || ''
       });
     }
   }, [settings]);
@@ -256,6 +284,126 @@ export default function Admin() {
                 onChange={(e) => setSettingsForm({ ...settingsForm, bio: e.target.value })}
                 placeholder="Tell visitors about yourself..."
                 rows={4}
+              />
+            </div>
+
+            {/* Contact Information */}
+            <div className="space-y-2 md:col-span-2">
+              <h3 className="text-lg font-semibold text-primary mt-4 mb-4">Contact Information</h3>
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Phone Number</Label>
+              <Input
+                value={settingsForm.phone}
+                onChange={(e) => setSettingsForm({ ...settingsForm, phone: e.target.value })}
+                placeholder="+1 234 567 890"
+              />
+            </div>
+
+            {/* Social Links */}
+            <div className="space-y-2 md:col-span-2">
+              <h3 className="text-lg font-semibold text-primary mt-4 mb-4">Social Media Links</h3>
+            </div>
+            
+            <div className="space-y-2">
+              <Label>GitHub URL</Label>
+              <Input
+                value={settingsForm.github_url}
+                onChange={(e) => setSettingsForm({ ...settingsForm, github_url: e.target.value })}
+                placeholder="https://github.com/yourusername"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>LinkedIn URL</Label>
+              <Input
+                value={settingsForm.linkedin_url}
+                onChange={(e) => setSettingsForm({ ...settingsForm, linkedin_url: e.target.value })}
+                placeholder="https://linkedin.com/in/yourusername"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Twitter URL</Label>
+              <Input
+                value={settingsForm.twitter_url}
+                onChange={(e) => setSettingsForm({ ...settingsForm, twitter_url: e.target.value })}
+                placeholder="https://twitter.com/yourusername"
+              />
+            </div>
+
+            {/* Hero Section Customization */}
+            <div className="space-y-2 md:col-span-2">
+              <h3 className="text-lg font-semibold text-primary mt-4 mb-4">Hero Section</h3>
+            </div>
+            
+            <div className="space-y-2 md:col-span-2">
+              <Label>Hero Subtitle</Label>
+              <Textarea
+                value={settingsForm.hero_subtitle}
+                onChange={(e) => setSettingsForm({ ...settingsForm, hero_subtitle: e.target.value })}
+                placeholder="I craft beautiful, responsive, and user-friendly web experiences..."
+                rows={3}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Primary CTA Button Text</Label>
+              <Input
+                value={settingsForm.hero_cta_primary_text}
+                onChange={(e) => setSettingsForm({ ...settingsForm, hero_cta_primary_text: e.target.value })}
+                placeholder="View My Work"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Primary CTA Button URL</Label>
+              <Input
+                value={settingsForm.hero_cta_primary_url}
+                onChange={(e) => setSettingsForm({ ...settingsForm, hero_cta_primary_url: e.target.value })}
+                placeholder="#projects"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Secondary CTA Button Text</Label>
+              <Input
+                value={settingsForm.hero_cta_secondary_text}
+                onChange={(e) => setSettingsForm({ ...settingsForm, hero_cta_secondary_text: e.target.value })}
+                placeholder="Download CV"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Secondary CTA Button URL</Label>
+              <Input
+                value={settingsForm.hero_cta_secondary_url}
+                onChange={(e) => setSettingsForm({ ...settingsForm, hero_cta_secondary_url: e.target.value })}
+                placeholder="#"
+              />
+            </div>
+
+            {/* Footer Customization */}
+            <div className="space-y-2 md:col-span-2">
+              <h3 className="text-lg font-semibold text-primary mt-4 mb-4">Footer</h3>
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Footer Tagline</Label>
+              <Input
+                value={settingsForm.footer_tagline}
+                onChange={(e) => setSettingsForm({ ...settingsForm, footer_tagline: e.target.value })}
+                placeholder="Building digital experiences that matter."
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Copyright Name</Label>
+              <Input
+                value={settingsForm.copyright_name}
+                onChange={(e) => setSettingsForm({ ...settingsForm, copyright_name: e.target.value })}
+                placeholder="Your Name"
               />
             </div>
           </div>
