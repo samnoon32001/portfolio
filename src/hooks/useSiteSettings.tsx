@@ -74,7 +74,25 @@ export function useSiteSettings() {
         } as SiteSettings;
       }
       
-      return data as SiteSettings;
+      // Merge database data with default values for any missing new fields
+      const mergedData = {
+        // Default values for new fields
+        phone: '+1 234 567 890',
+        github_url: '#',
+        linkedin_url: '#',
+        twitter_url: '#',
+        hero_subtitle: 'I craft beautiful, responsive, and user-friendly web experiences using modern technologies. Let\'s build something amazing together.',
+        hero_cta_primary_text: 'View My Work',
+        hero_cta_primary_url: '#projects',
+        hero_cta_secondary_text: 'Download CV',
+        hero_cta_secondary_url: '#',
+        footer_tagline: 'Building digital experiences that matter.',
+        copyright_name: 'Your Name',
+        // Override with actual data from database
+        ...data
+      } as SiteSettings;
+      
+      return mergedData;
     }
   });
 }
