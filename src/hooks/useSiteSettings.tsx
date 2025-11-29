@@ -59,29 +59,58 @@ export function useUpdateSiteSettings() {
       console.log('Starting update with settings:', settings);
       
       try {
-        // Use upsert to handle both insert and update in one operation
-        // Remove the id field if it exists to let the database handle it
-        const { id, ...settingsToUpsert } = settings;
-        
-        console.log('Attempting upsert with data:', settingsToUpsert);
-        
-        const { data, error } = await supabase
+        // First, get any existing record
+        const { data: existing, error: fetchError } = await supabase
           .from('site_settings')
-          .upsert(settingsToUpsert, {
-            onConflict: 'id',
-            ignoreDuplicates: false
-          })
-          .select()
-          .single();
+          .select('id')
+          .limit(1)
+          .maybeSingle();
         
-        console.log('Upsert result:', { data, error });
+        console.log('Existing record check:', { existing, fetchError });
         
-        if (error) {
-          console.error('Error in upsert:', error);
-          throw error;
+        if (fetchError) {
+          console.error('Error fetching existing record:', fetchError);
+          throw fetchError;
         }
         
-        return data;
+        let result;
+        if (existing) {
+          // Update existing record
+          console.log('Updating existing record with ID:', existing.id);
+          const { data, error } = await supabase
+            .from('site_settings')
+            .update(settings)
+            .eq('id', existing.id)
+            .select()
+            .single();
+          
+          console.log('Update result:', { data, error });
+          
+          if (error) {
+            console.error('Error updating:', error);
+            throw error;
+          }
+          result = data;
+        } else {
+          // Insert new record (remove id if present)
+          console.log('Inserting new record');
+          const { id, ...settingsToInsert } = settings;
+          const { data, error } = await supabase
+            .from('site_settings')
+            .insert(settingsToInsert)
+            .select()
+            .single();
+          
+          console.log('Insert result:', { data, error });
+          
+          if (error) {
+            console.error('Error inserting:', error);
+            throw error;
+          }
+          result = data;
+        }
+        
+        return result;
       } catch (err) {
         console.error('Complete error details:', err);
         throw err;
