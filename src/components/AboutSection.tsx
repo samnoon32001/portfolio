@@ -1,6 +1,9 @@
 import { MapPin, Mail, Languages, GraduationCap } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function AboutSection() {
+  const { data: settings } = useSiteSettings();
+
   return (
     <section id="about" className="py-24 relative">
       {/* Background accent */}
@@ -11,14 +14,24 @@ export function AboutSection() {
           {/* Image side */}
           <div className="relative animate-slide-in-left">
             <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-secondary to-card border border-border">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center mb-4">
-                    <span className="text-5xl font-bold text-primary-foreground">YN</span>
+              {settings?.photo_url ? (
+                <img 
+                  src={settings.photo_url} 
+                  alt={settings.name || 'Profile'} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center mb-4">
+                      <span className="text-5xl font-bold text-primary-foreground">
+                        {settings?.name?.charAt(0) || 'Y'}
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">Your photo here</p>
                   </div>
-                  <p className="text-muted-foreground text-sm">Your photo here</p>
                 </div>
-              </div>
+              )}
             </div>
             
             {/* Decorative card */}
@@ -28,8 +41,8 @@ export function AboutSection() {
                   <GraduationCap className="text-primary" size={18} />
                 </div>
                 <div>
-                  <div className="font-semibold text-sm">Education</div>
-                  <div className="text-xs text-muted-foreground">CS Degree</div>
+                  <div className="font-semibold text-sm">{settings?.education || 'Education'}</div>
+                  <div className="text-xs text-muted-foreground">{settings?.degree || 'CS Degree'}</div>
                 </div>
               </div>
             </div>
@@ -44,10 +57,7 @@ export function AboutSection() {
             </h2>
             
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm a full-stack developer with over 5 years of experience building 
-              web applications. I specialize in creating modern, responsive, and 
-              user-friendly interfaces using the latest technologies. My passion 
-              lies in transforming complex problems into simple, elegant solutions.
+              {settings?.bio || "I'm a full-stack developer with experience building web applications. I specialize in creating modern, responsive, and user-friendly interfaces using the latest technologies. My passion lies in transforming complex problems into simple, elegant solutions."}
             </p>
             
             <p className="text-muted-foreground mb-8 leading-relaxed">
@@ -58,10 +68,10 @@ export function AboutSection() {
 
             {/* Info cards */}
             <div className="grid sm:grid-cols-2 gap-4">
-              <InfoCard icon={<MapPin size={20} />} label="Location" value="Your City, Country" />
-              <InfoCard icon={<Mail size={20} />} label="Email" value="your@email.com" />
+              <InfoCard icon={<MapPin size={20} />} label="Location" value={settings?.location || 'Your City, Country'} />
+              <InfoCard icon={<Mail size={20} />} label="Email" value={settings?.email || 'your@email.com'} />
               <InfoCard icon={<Languages size={20} />} label="Languages" value="Arabic & English" />
-              <InfoCard icon={<GraduationCap size={20} />} label="Degree" value="Computer Science" />
+              <InfoCard icon={<GraduationCap size={20} />} label="Degree" value={settings?.degree || 'Computer Science'} />
             </div>
           </div>
         </div>

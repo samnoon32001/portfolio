@@ -1,59 +1,24 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const projects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-featured online store with cart functionality, payment integration, and admin dashboard.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-    tags: ["React", "Node.js", "Stripe", "MongoDB"],
-    category: "Full Stack",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "A collaborative project management tool with real-time updates and team features.",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-    tags: ["React", "TypeScript", "Supabase"],
-    category: "Web App",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 3,
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio showcasing creative work with smooth animations.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-    category: "Frontend",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 4,
-    title: "AI Content Generator",
-    description: "An intelligent tool that generates marketing content using advanced AI models.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-    tags: ["Python", "OpenAI", "React", "FastAPI"],
-    category: "AI/ML",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-];
-
-const categories = ["All", "Full Stack", "Web App", "Frontend", "AI/ML"];
+import { useProjects } from "@/hooks/useProjects";
 
 export function ProjectsSection() {
+  const { data: projects, isLoading } = useProjects();
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredProjects =
-    activeCategory === "All"
+  const categories = useMemo(() => {
+    if (!projects) return ["All"];
+    const cats = new Set(projects.map((p) => p.category || "Other"));
+    return ["All", ...Array.from(cats)];
+  }, [projects]);
+
+  const filteredProjects = useMemo(() => {
+    if (!projects) return [];
+    return activeCategory === "All"
       ? projects
       : projects.filter((p) => p.category === activeCategory);
+  }, [projects, activeCategory]);
 
   return (
     <section id="projects" className="py-24">
@@ -87,11 +52,19 @@ export function ProjectsSection() {
         </div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center py-12">
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : filteredProjects.length === 0 ? (
+          <p className="text-center text-muted-foreground py-12">No projects to display.</p>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-8">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        )}
 
         {/* View all button */}
         <div className="text-center mt-12">
@@ -109,7 +82,15 @@ function ProjectCard({
   project,
   index,
 }: {
-  project: typeof projects[0];
+  project: {
+    id: string;
+    title: string;
+    description: string | null;
+    image_url: string | null;
+    category: string | null;
+    live_url: string | null;
+    github_url: string | null;
+  };
   index: number;
 }) {
   return (
@@ -120,7 +101,7 @@ function ProjectCard({
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
         <img
-          src={project.image}
+          src={project.image_url || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
@@ -128,24 +109,34 @@ function ProjectCard({
         
         {/* Overlay links */}
         <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/60 backdrop-blur-sm">
-          <a
-            href={project.liveUrl}
-            className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform"
-          >
-            <ExternalLink size={20} />
-          </a>
-          <a
-            href={project.githubUrl}
-            className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-foreground hover:scale-110 transition-transform"
-          >
-            <Github size={20} />
-          </a>
+          {project.live_url && (
+            <a
+              href={project.live_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform"
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
+          {project.github_url && (
+            <a
+              href={project.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-foreground hover:scale-110 transition-transform"
+            >
+              <Github size={20} />
+            </a>
+          )}
         </div>
 
         {/* Category badge */}
-        <span className="absolute top-4 left-4 px-3 py-1 text-xs font-medium rounded-full bg-primary/90 text-primary-foreground">
-          {project.category}
-        </span>
+        {project.category && (
+          <span className="absolute top-4 left-4 px-3 py-1 text-xs font-medium rounded-full bg-primary/90 text-primary-foreground">
+            {project.category}
+          </span>
+        )}
       </div>
 
       {/* Content */}
@@ -154,20 +145,8 @@ function ProjectCard({
           {project.title}
         </h3>
         <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-          {project.description}
+          {project.description || "No description available."}
         </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-xs rounded-full bg-secondary text-muted-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
     </div>
   );
