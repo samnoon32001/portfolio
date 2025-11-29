@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { Loader2, LogOut, Save, Plus, Trash2, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
+import SupabaseFileUpload from '@/components/ui/SupabaseFileUpload';
 
 export default function Admin() {
   const { user, isAdmin, loading, signOut } = useAuth();
@@ -206,11 +207,10 @@ export default function Admin() {
             </div>
 
             <div className="space-y-2">
-              <Label>Photo URL</Label>
-              <Input
+              <SupabaseFileUpload
                 value={settingsForm.photo_url}
-                onChange={(e) => setSettingsForm({ ...settingsForm, photo_url: e.target.value })}
-                placeholder="https://example.com/photo.jpg"
+                onChange={(url) => setSettingsForm({ ...settingsForm, photo_url: url })}
+                maxSize={5}
               />
             </div>
 
