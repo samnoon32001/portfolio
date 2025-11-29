@@ -35,10 +35,11 @@ export function DynamicFavicon() {
         // Update Open Graph image
         let ogImage = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
         if (ogImage) {
+          ogImage.setAttribute('property', 'og:image');
           ogImage.content = settings.photo_url;
         } else {
           ogImage = document.createElement('meta');
-          ogImage.property = 'og:image';
+          ogImage.setAttribute('property', 'og:image');
           ogImage.content = settings.photo_url;
           document.head.appendChild(ogImage);
         }
@@ -46,10 +47,11 @@ export function DynamicFavicon() {
         // Update Twitter image
         let twitterImage = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement;
         if (twitterImage) {
+          twitterImage.setAttribute('name', 'twitter:image');
           twitterImage.content = settings.photo_url;
         } else {
           twitterImage = document.createElement('meta');
-          twitterImage.name = 'twitter:image';
+          twitterImage.setAttribute('name', 'twitter:image');
           twitterImage.content = settings.photo_url;
           document.head.appendChild(twitterImage);
         }
