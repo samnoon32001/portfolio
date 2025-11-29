@@ -84,7 +84,7 @@
     @apply bg-card/50 backdrop-blur-xl border border-border/50;
   }
 
-  /* Floating animation for decorative elements - NextMind inspired subtle movement */
+  /* Floating animation for decorative elements - NextMind inspired 3D movement */
   .floating {
     animation: floating 10s ease-in-out infinite;
   }
@@ -97,6 +97,24 @@
   .floating-slow {
     animation: floating 14s ease-in-out infinite;
     animation-delay: 1s;
+  }
+
+  /* 3D Floating animations with enhanced transforms */
+  .floating-3d {
+    animation: floating-3d 10s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
+
+  .floating-delayed-3d {
+    animation: floating-3d 12s ease-in-out infinite;
+    animation-delay: 2s;
+    transform-style: preserve-3d;
+  }
+
+  .floating-slow-3d {
+    animation: floating-3d 14s ease-in-out infinite;
+    animation-delay: 1s;
+    transform-style: preserve-3d;
   }
 
   /* Section styling */
@@ -232,6 +250,21 @@
   }
   75% {
     transform: translateY(-15px) rotate(-2deg);
+  }
+}
+
+@keyframes floating-3d {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-20px) rotateX(15deg) rotateY(10deg) rotateZ(5deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-35px) rotateX(10deg) rotateY(-10deg) rotateZ(0deg) scale(1.1);
+  }
+  75% {
+    transform: translateY(-20px) rotateX(-5deg) rotateY(15deg) rotateZ(-5deg) scale(1.05);
   }
 }
 
