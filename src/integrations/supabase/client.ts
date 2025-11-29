@@ -2,6 +2,14 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
+// Extend Window interface for debug flags
+declare global {
+  interface Window {
+    supabaseDebugLogged?: boolean;
+    supabaseClientDebugLogged?: boolean;
+  }
+}
+
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
