@@ -66,9 +66,8 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-            © {new Date().getFullYear()} Made with{" "}
-            <Heart size={14} className="text-primary fill-primary" /> by {settings?.copyright_name || settings?.name || 'Your Name'}
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Made by {settings?.copyright_name || settings?.name || 'Your Name'}
           </p>
         </div>
       </div>
