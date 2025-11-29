@@ -5,9 +5,12 @@ import type { Database } from './types';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-// Debug environment variables
-console.log('Supabase URL:', SUPABASE_URL);
-console.log('Supabase Key:', SUPABASE_PUBLISHABLE_KEY?.slice(0, 10) + '...');
+// Debug environment variables (only log once)
+if (!window.supabaseDebugLogged) {
+  console.log('Supabase URL:', SUPABASE_URL);
+  console.log('Supabase Key:', SUPABASE_PUBLISHABLE_KEY?.slice(0, 10) + '...');
+  window.supabaseDebugLogged = true;
+}
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
@@ -20,5 +23,8 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
   }
 });
 
-// Debug: Test Supabase connection
-console.log('Supabase client created:', !!supabase);
+// Debug: Test Supabase connection (only log once)
+if (!window.supabaseClientDebugLogged) {
+  console.log('Supabase client created:', !!supabase);
+  window.supabaseClientDebugLogged = true;
+}
