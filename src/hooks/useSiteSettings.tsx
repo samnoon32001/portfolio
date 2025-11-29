@@ -56,41 +56,36 @@ export function useUpdateSiteSettings() {
   
   return useMutation({
     mutationFn: async (settings: Partial<SiteSettings>) => {
-      // First, try to get existing settings
-      const { data: existing, error: fetchError } = await supabase
-        .from('site_settings')
-        .select('id')
-        .limit(1)
-        .maybeSingle();
-
-      if (fetchError) throw fetchError;
-
-      let result;
-      if (existing) {
-        // Update existing record
-        const { data, error } = await supabase
-          .from('site_settings')
-          .update(settings)
-          .eq('id', existing.id)
-          .select()
-          .single();
-        
-        if (error) throw error;
-        result = data;
-      } else {
-        // Insert new record (remove id from settings if present)
-        const { id, ...settingsToInsert } = settings;
-        const { data, error } = await supabase
-          .from('site_settings')
-          .insert(settingsToInsert)
-          .select()
-          .single();
-        
-        if (error) throw error;
-        result = data;
-      }
+      console.log('Starting update with settings:', settings);
       
-      return result;
+      try {
+        // Use upsert to handle both insert and update in one operation
+        // Remove the id field if it exists to let the database handle it
+        const { id, ...settingsToUpsert } = settings;
+        
+        console.log('Attempting upsert with data:', settingsToUpsert);
+        
+        const { data, error } = await supabase
+          .from('site_settings')
+          .upsert(settingsToUpsert, {
+            onConflict: 'id',
+            ignoreDuplicates: false
+          })
+          .select()
+          .single();
+        
+        console.log('Upsert result:', { data, error });
+        
+        if (error) {
+          console.error('Error in upsert:', error);
+          throw error;
+        }
+        
+        return data;
+      } catch (err) {
+        console.error('Complete error details:', err);
+        throw err;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['site-settings'] });
