@@ -24,9 +24,28 @@ export function useSiteSettings() {
         .from('site_settings')
         .select('*')
         .limit(1)
-        .single();
+        .maybeSingle();
       
       if (error) throw error;
+      
+      // Return default settings if no data exists
+      if (!data) {
+        return {
+          id: '',
+          name: 'Your Name',
+          tagline: 'Web Developer & Designer',
+          bio: 'I\'m a passionate web developer with expertise in creating modern, responsive websites and applications.',
+          photo_url: '',
+          location: 'Your Location',
+          email: 'hello@example.com',
+          degree: 'CS Degree',
+          education: 'Education',
+          years_experience: 5,
+          projects_completed: 50,
+          satisfied_clients: 30
+        } as SiteSettings;
+      }
+      
       return data as SiteSettings;
     }
   });
@@ -42,11 +61,9 @@ export function useUpdateSiteSettings() {
         .from('site_settings')
         .select('id')
         .limit(1)
-        .single();
+        .maybeSingle();
 
-      if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 is "no rows returned"
-        throw fetchError;
-      }
+      if (fetchError) throw fetchError;
 
       let result;
       if (existing) {
