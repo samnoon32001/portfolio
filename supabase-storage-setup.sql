@@ -3,6 +3,15 @@
 -- =====================================================
 -- Run this SQL in your Supabase SQL Editor
 
+-- First, enable the storage extension if not already enabled
+CREATE EXTENSION IF NOT EXISTS "storage" SCHEMA "extensions";
+
+-- Enable the storage schema
+CREATE SCHEMA IF NOT EXISTS "storage";
+
+-- Set up storage tables if they don't exist
+-- These tables are created automatically by Supabase, but we'll ensure they exist
+
 -- 1. Create a storage bucket for profile images
 -- Note: You can also create this bucket via the Supabase Dashboard UI
 INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
@@ -146,8 +155,61 @@ GRANT ALL ON storage.objects TO authenticated;
 GRANT ALL ON storage.buckets TO authenticated;
 
 -- =====================================================
--- Verify setup
+-- Verify setup (only run if tables exist)
 -- =====================================================
--- You can verify the setup by running:
-SELECT * FROM storage.buckets WHERE id = 'profile-images';
-SELECT * FROM storage.policies WHERE bucket_id = 'profile-images';
+-- You can verify the setup by running these commands individually:
+
+-- Check if bucket exists (run this separately)
+-- SELECT * FROM storage.buckets WHERE id = 'profile-images';
+
+-- Check if policies exist (run this separately)
+-- SELECT * FROM storage.policies WHERE bucket_id = 'profile-images';
+
+-- =====================================================
+-- Manual Setup Instructions (if automated setup fails)
+-- =====================================================
+
+-- If you get errors, follow these steps instead:
+
+-- Step 1: Create bucket via Supabase Dashboard
+-- 1. Go to Storage section in Supabase Dashboard
+-- 2. Click "New bucket"
+-- 3. Name: "profile-images"
+-- 4. Public bucket: Yes
+-- 5. File size limit: 5242880 (5MB)
+-- 6. Allowed MIME types: image/jpeg, image/png, image/gif, image/webp
+
+-- Step 2: Run only the policies below
+-- (After creating bucket via dashboard, run these policies in SQL Editor)
+
+/*
+-- Policy: Allow authenticated users to upload their own profile images
+CREATE POLICY "Users can upload their own profile images" ON storage.objects
+FOR INSERT WITH CHECK (
+  bucket_id = 'profile-images' 
+  AND auth.role() = 'authenticated'
+  AND (storage.foldername(name))[1] = 'avatars'
+);
+
+-- Policy: Allow authenticated users to update their own profile images
+CREATE POLICY "Users can update their own profile images" ON storage.objects
+FOR UPDATE USING (
+  bucket_id = 'profile-images' 
+  AND auth.role() = 'authenticated'
+  AND (storage.foldername(name))[1] = 'avatars'
+);
+
+-- Policy: Allow public access to view profile images
+CREATE POLICY "Profile images are publicly accessible" ON storage.objects
+FOR SELECT USING (
+  bucket_id = 'profile-images'
+);
+
+-- Policy: Allow users to delete their own profile images
+CREATE POLICY "Users can delete their own profile images" ON storage.objects
+FOR DELETE USING (
+  bucket_id = 'profile-images' 
+  AND auth.role() = 'authenticated'
+  AND (storage.foldername(name))[1] = 'avatars'
+);
+*/
