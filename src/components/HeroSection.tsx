@@ -13,11 +13,13 @@ export function HeroSection() {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-hero-gradient" />
       
-      {/* Floating decorative elements - Dynamic CSS shapes */}
-      <div className="absolute left-[5%] top-[30%] w-32 md:w-48 h-32 md:h-48 opacity-70 floating bg-gradient-to-br from-primary/20 to-orange-600/20 rounded-full blur-sm hover:scale-110 transition-transform duration-1000" />
-      <div className="absolute right-[5%] top-[15%] w-32 md:w-44 h-32 md:h-44 opacity-60 floating-delayed bg-gradient-to-tr from-purple-500/20 to-pink-600/20 rounded-2xl blur-sm hover:rotate-12 transition-transform duration-700" />
-      <div className="absolute left-[10%] bottom-[25%] w-24 md:w-32 h-24 md:h-32 opacity-50 floating-slow bg-gradient-to-bl from-blue-500/20 to-cyan-600/20 rounded-lg blur-sm hover:scale-95 transition-transform duration-800" />
-      <div className="absolute right-[15%] bottom-[20%] w-24 md:w-32 h-24 md:h-32 opacity-50 floating-slow rotate-45 bg-gradient-to-tl from-green-500/20 to-emerald-600/20 rounded-3xl blur-sm hover:rotate-90 transition-transform duration-1000" />
+      {/* Floating decorative elements - NextMind inspired clean geometric shapes */}
+      <div className="absolute left-[8%] top-[25%] w-20 md:w-24 h-20 md:h-24 opacity-30 floating bg-gradient-to-br from-primary/40 to-transparent rounded-lg" />
+      <div className="absolute right-[12%] top-[20%] w-16 md:w-20 h-16 md:h-20 opacity-25 floating-delayed bg-gradient-to-tr from-purple-500/30 to-transparent rounded-full" />
+      <div className="absolute left-[15%] bottom-[30%] w-12 md:w-16 h-12 md:h-16 opacity-20 floating-slow bg-gradient-to-bl from-blue-500/25 to-transparent rounded-md" />
+      <div className="absolute right-[20%] bottom-[25%] w-14 md:w-18 h-14 md:h-18 opacity-25 floating-slow rotate-45 bg-gradient-to-tl from-orange-500/30 to-transparent rounded-lg" />
+      <div className="absolute left-[45%] top-[15%] w-8 md:w-10 h-8 md:h-10 opacity-15 floating bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full" />
+      <div className="absolute right-[35%] bottom-[20%] w-6 md:w-8 h-6 md:h-8 opacity-20 floating-delayed bg-gradient-to-b from-green-500/25 to-transparent rounded-md" />
 
       {/* Gradient orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" />
