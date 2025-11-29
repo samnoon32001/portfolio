@@ -40,6 +40,7 @@ export function useUpdateSiteSettings() {
       const { data, error } = await supabase
         .from('site_settings')
         .update(settings)
+        .eq('id', settings.id)
         .select()
         .single();
       
