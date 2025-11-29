@@ -515,8 +515,8 @@ function ProjectCard({
   isUpdating 
 }: { 
   project: Project; 
-  onUpdate: (project: Project) => void;
-  onDelete: (id: string) => void;
+  onUpdate: (project: Project) => Promise<void>;
+  onDelete: (id: string) => Promise<void>;
   isUpdating: boolean;
 }) {
   const [form, setForm] = useState(project);
