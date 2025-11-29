@@ -13,7 +13,7 @@ export function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image side */}
           <div className="relative animate-slide-in-left">
-            <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-secondary to-card border border-border">
+            <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-full overflow-hidden bg-gradient-to-br from-secondary to-card border border-border">
               {settings?.photo_url ? (
                 <img 
                   src={settings.photo_url} 
