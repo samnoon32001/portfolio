@@ -99,7 +99,81 @@
     animation-delay: 1s;
   }
 
-  /* 3D Floating animations with enhanced transforms */
+  /* 3D Cube Styles */
+.cube-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate-cube 20s infinite linear;
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.cube-front { transform: translateZ(50%); }
+.cube-back { transform: rotateY(180deg) translateZ(50%); }
+.cube-right { transform: rotateY(90deg) translateZ(50%); }
+.cube-left { transform: rotateY(-90deg) translateZ(50%); }
+.cube-top { transform: rotateX(90deg) translateZ(50%); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(50%); }
+
+/* Responsive cube sizes */
+@media (max-width: 768px) {
+  .cube-front { transform: translateZ(40%); }
+  .cube-back { transform: rotateY(180deg) translateZ(40%); }
+  .cube-right { transform: rotateY(90deg) translateZ(40%); }
+  .cube-left { transform: rotateY(-90deg) translateZ(40%); }
+  .cube-top { transform: rotateX(90deg) translateZ(40%); }
+  .cube-bottom { transform: rotateX(-90deg) translateZ(40%); }
+}
+
+/* 3D Sphere Styles */
+.sphere-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate-sphere 15s infinite linear;
+}
+
+.sphere-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+}
+
+.sphere-front { transform: translateZ(50%); }
+.sphere-back { transform: rotateY(180deg) translateZ(50%); }
+.sphere-right { transform: rotateY(90deg) translateZ(50%); }
+.sphere-left { transform: rotateY(-90deg) translateZ(50%); }
+
+/* Responsive sphere sizes */
+@media (max-width: 768px) {
+  .sphere-front { transform: translateZ(40%); }
+  .sphere-back { transform: rotateY(180deg) translateZ(40%); }
+  .sphere-right { transform: rotateY(90deg) translateZ(40%); }
+  .sphere-left { transform: rotateY(-90deg) translateZ(40%); }
+}
+
+/* 3D Rotation Animations */
+@keyframes rotate-cube {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes rotate-sphere {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* 3D Floating animations with enhanced transforms */
   .floating-3d {
     animation: floating-3d 10s ease-in-out infinite;
     transform-style: preserve-3d;
